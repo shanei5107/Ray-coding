@@ -1,2 +1,43 @@
 server:
   port: 8888
+
+spring:
+  application:
+    name: Ray-coding
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.18.102:3306/small_product?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+    username: root
+    password: 1qaz2wsx
+  thymeleaf:
+    cache: false
+  pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    pageSizeZero: false
+
+# mybatis-plus settings
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations:
+    - classpath*:com/ray/coding/**/xml/*.xml
+
+# 监控
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - "*"
+
+# app配置
+app:
+  generator:
+    superEntityClass: com.ray.BaseEntity
+    superEntityColumns: CREATE_BY,CREATE_TIME,MODIFY_BY,MODIFY_TIME,DELETED
+    author: ray
+
+log:
+  path: /Users/ray/workspace/logs

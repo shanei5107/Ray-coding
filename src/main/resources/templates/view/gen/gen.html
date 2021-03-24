@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>AutoCoding代码生成器</title>
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <link rel="stylesheet" th:href="@{/component/layui/css/layui.css}"/>
+    <link rel="stylesheet" th:href="@{/css/public.css}"/>
+</head>
+<body>
+    <div class="layui-fluid">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <!-- 表查询 -->
+                <form class="layui-form" id="genForm">
+                    <div class="layui-form">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">表名</label>
+                                <div class="layui-input-inline">
+                                    <input id="tableName" name="tableName" class="layui-input" type="text" placeholder="请输入表名"/>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">表描述</label>
+                                <div class="layui-input-inline">
+                                    <input id="tableDescribe" name="tableDescribe" class="layui-input" type="text" placeholder="请输入表描述"/>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <button type="button" id="searchBtn" class="layui-btn layui-btn-normal icon-btn layui-btn-sm">
+                                    <i class="layui-icon">&#xe615;</i> 搜索
+                                </button>
+                                <button type="button" id="resetBtn" class="layui-btn layui-btn-primary icon-btn layui-btn-sm">
+                                    <i class="layui-icon">&#xe669;</i> 重置
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- 代码生成 -->
+                <form class="layui-form" id="createForm">
+                    <div class="layui-form">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">基类</label>
+                                <div class="layui-input-inline">
+                                    <input id="superEntityClass" name="superEntityClass" th:value="${superEntityClass}"
+                                           placeholder="实体类的基类" autocomplete="off" class="layui-input"/>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">公共字段</label>
+                                <div class="layui-input-inline">
+                                    <input id="superEntityColumns" name="superEntityColumns" th:value="${superEntityColumns}"
+                                           placeholder="公共字段" autocomplete="off" class="layui-input"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">包路径</label>
+                                <div class="layui-input-inline">
+                                    <input id="packageName" name="packageName" required lay-verify="required"
+                                           placeholder="请输入生成包路径" autocomplete="off" class="layui-input"/>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">模块名称</label>
+                                <div class="layui-input-inline">
+                                    <input id="moduleName" name="moduleName" required lay-verify="required"
+                                           placeholder="请输入模块名称" autocomplete="off" class="layui-input"/>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">表前缀</label>
+                                <div class="layui-input-inline">
+                                    <input id="tablePrefix" name="tablePrefix"
+                                           placeholder="表前缀生成将会被移除" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">作者</label>
+                                <div class="layui-input-inline">
+                                    <input id="author" name="author" required lay-verify="required" th:value="${author}"
+                                           placeholder="输入注释作者信息" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <button type="button" id="createBtn" class="layui-btn icon-btn layui-btn-sm">
+                                    <i class="layui-icon">&#xe642;</i> 代码生成
+                                </button>
+                                <button type="button" id="createRest" class="layui-btn layui-btn-primary icon-btn layui-btn-sm">
+                                    <i class="layui-icon">&#xe669;</i> 重置
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- 表列表 -->
+                <table id="genTable" lay-filter="genTable"></table>
+            </div>
+        </div>
+    </div>
+
+    <!-- 行工具栏 -->
+    <script type="text/html" id="tableBar">
+        <a class="layui-btn layui-btn-xs" lay-event="info">查看</a>
+    </script>
+
+    <!-- js -->
+    <script th:src="@{/component/layui/layui.js}"></script>
+    <script th:src="@{/assets/common/lay-config.js}"></script>
+    <script th:src="@{/assets/modular/gen/gen.js}"></script>
+
+</body>
+</html>
